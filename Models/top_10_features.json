@@ -1,0 +1,12 @@
+[
+  "bidirectional_bytes",
+  "application_name",
+  "src2dst_syn_packets",
+  "dst2src_bytes",
+  "src2dst_mean_ps",
+  "requested_server_name",
+  "bidirectional_syn_packets",
+  "src2dst_psh_packets",
+  "application_is_guessed",
+  "dst2src_min_piat_ms"
+]

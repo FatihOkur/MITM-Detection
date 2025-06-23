@@ -14,7 +14,7 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import LSTM, Dense, Dropout
 from tensorflow.keras.utils import to_categorical
 from tensorflow.keras.optimizers import Adam
-
+import joblib
 
 df = pd.read_csv('Data/All_Labelled.csv')
 print(df)
@@ -298,3 +298,21 @@ xgb_top10_pred = xgb_top10.predict(X_test_top10)
 result_xgb_top10 = evaluate_model("XGBoost SMOTED with Top 10 features", y_test, xgb_top10_pred)
 result_xgb_top10_df = pd.DataFrame([result_xgb_top10])
 print(result_xgb_top10_df.to_string(index=False))
+
+# Örnek: model bir RandomForest olabilir
+joblib.dump(xgb_top10, "Models/yakut_xgboost_model.joblib")
+
+# Model.py'nin en sonuna ekleyin (joblib.dump satırından hemen sonra):
+
+# Scaler'ı kaydet
+joblib.dump(scaler, "Models/yakut_scaler.joblib")
+
+# Top 10 features'ı JSON olarak kaydet
+import json
+with open('Models/top_10_features.json', 'w') as f:
+    json.dump(top_10_features, f, indent=2)
+
+print("\n✅ Tüm dosyalar kaydedildi:")
+print("   - Models/yakut_xgboost_model.joblib")
+print("   - Models/yakut_scaler.joblib") 
+print("   - Models/top_10_features.json")
